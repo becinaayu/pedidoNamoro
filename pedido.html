@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quer namorar comigo?</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #ffe6f0, #ffd6e8);
+      font-family: 'Comic Sans MS', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    h1 {
+      color: #cc0066;
+      font-size: 3em;
+      text-align: center;
+      margin-bottom: 50px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .buttons {
+      display: flex;
+      gap: 30px;
+      position: relative;
+    }
+
+    button {
+      width: 150px;
+      height: 60px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    #yesBtn {
+      background-color: #ff66a3;
+      color: white;
+      z-index: 1;
+      position: relative;
+    }
+
+    #noBtn {
+      background-color: #cccccc;
+      color: black;
+      position: absolute;
+      top: 0;
+      left: 180px; /* posição inicial */
+      z-index: 0;
+    }
+
+    .message {
+      margin-top: 40px;
+      font-size: 2em;
+      color: #800040;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+    <img src="https://media.tenor.com/7rfBk0z8gRkAAAAm/yahoo-messenger-emoticon.webp" 
+     alt="Corações Fofos" 
+     style="width: 150px; margin-bottom: 20px;" />
+
+  <h1>Quer namorar comigo, Rodrigo? 💖</h1>
+  <div class="buttons" id="buttonArea">
+    <button id="yesBtn">Sim 🥰</button>
+    <button id="noBtn">Não 😢</button>
+  </div>
+  <div class="message" id="message">Sabia que você ia dizer sim! 💘</div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const message = document.getElementById('message');
+
+    noBtn.addEventListener('mouseenter', () => {
+      const body = document.body;
+
+      const maxX = window.innerWidth - noBtn.offsetWidth;
+      const maxY = window.innerHeight - noBtn.offsetHeight;
+
+      // Garante que o botão não fique por cima do botão Sim (centro da tela)
+      let newX, newY;
+      do {
+        newX = Math.random() * maxX;
+        newY = Math.random() * maxY;
+      } while (
+        Math.abs(newX - yesBtn.getBoundingClientRect().left) < 160 &&
+        Math.abs(newY - yesBtn.getBoundingClientRect().top) < 80
+      );
+
+      noBtn.style.left = `${newX}px`;
+      noBtn.style.top = `${newY}px`;
+    });
+
+    yesBtn.addEventListener('click', () => {
+      message.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
